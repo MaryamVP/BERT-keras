@@ -18,7 +18,7 @@ def tpu_compatible():
         sess = K.get_session()
         uninitialized_variables = set([i.decode('ascii') for i in sess.run(tf.report_uninitialized_variables())])
         init_op = tf.variables_initializer(
-            [v for v in tf.global_variables() if v.name.split(':')[0] in uninitialized_variables]
+            [v for v in tf.global_variables() if v.name.split(':')[0] in uninitialized_variables], reuse = True
         )
         sess.run(init_op)
 
